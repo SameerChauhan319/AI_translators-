@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Translator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="dark-theme">
+
+  <header>
+    <button id="translateBtn" onclick="translateText()">Translate</button>
+    <span id="spinner" style="display:none;">⏳</span>
+    <button onclick="speakOutput()">Speak</button>
+    <button onclick="clearText()">Clear</button>
+    <button onclick="toggleTheme()">Theme</button>
+  </header>
+
+  <div class="container">
+    <!-- Left Panel -->
+    <div class="panel">
+      <label for="sourceLang">From:</label>
+      <select id="sourceLang"></select>
+
+      <label for="tone">Tone:</label>
+      <select id="tone">
+        <option value="neutral">Neutral Tone</option>
+        <option value="formal">Formal</option>
+        <option value="casual">Casual</option>
+        <option value="friendly">Friendly</option>
+      </select>
+
+      <label for="gender">Gender:</label>
+      <select id="gender">
+        <option value="neutral">Gender Neutral</option>
+        <option value="male">Masculine</option>
+        <option value="female">Feminine</option>
+      </select>
+
+      <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="panel">
+      <label for="targetLang">To:</label>
+      <select id="targetLang"></select>
+
+      <textarea id="outputText" readonly placeholder="Translated output..."></textarea>
+    </div>
+  </div>
+
+  <!-- Floating Bottom Buttons -->
+  <div class="floating-btns">
+    <button onclick="speakInput()">🎤 Speak Input</button>
+    <button onclick="saveText()">💾 Save</button>
+  </div>
+
+  <script src="/static/script.js"></script>
+  <script>
+   
+    document.addEventListener("DOMContentLoaded", () => {
+      const langMap = {
+        "English 🇬🇧": "en", "Hindi 🇮🇳": "hi", "Marathi 🇮🇳": "mr", "Tamil 🇮🇳": "ta",
+        "Telugu 🇮🇳": "te", "Bengali 🇮🇳": "bn", "Gujarati 🇮🇳": "gu", "Kannada 🇮🇳": "kn",
+        "Malayalam 🇮🇳": "ml", "Punjabi 🇮🇳": "pa", "Urdu 🇮🇳": "ur", "Spanish 🇪🇸": "es",
+        "French 🇫🇷": "fr", "German 🇩🇪": "de", "Italian 🇮🇹": "it", "Chinese 🇨🇳": "zh-CN",
+        "Japanese 🇯🇵": "ja"
+      };
+
+      const sourceLang = document.getElementById("sourceLang");
+      const targetLang = document.getElementById("targetLang");
+
+      Object.keys(langMap).forEach(lang => {
+        const opt1 = document.createElement("option");
+        const opt2 = document.createElement("option");
+        opt1.textContent = lang;
+        opt2.textContent = lang;
+        sourceLang.appendChild(opt1);
+        targetLang.appendChild(opt2);
+      });
+
+      // Default selections
+      sourceLang.value = "English 🇬🇧";
+      targetLang.value = "Hindi 🇮🇳";
+    });
+  </script>
+</body>
+</html>
